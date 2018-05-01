@@ -14,6 +14,8 @@
 		30065D5720982FF20071A085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30065D5520982FF20071A085 /* LaunchScreen.storyboard */; };
 		30065D5A20982FF20071A085 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D5920982FF20071A085 /* main.m */; };
 		30065D6420982FF20071A085 /* Personal_CapitalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D6320982FF20071A085 /* Personal_CapitalTests.m */; };
+		30065D70209833240071A085 /* RSSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D6F209833240071A085 /* RSSEntry.m */; };
+		30065D7A209928D00071A085 /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D79209928D00071A085 /* RSSParser.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,10 @@
 		30065D5F20982FF20071A085 /* Personal CapitalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Personal CapitalTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30065D6320982FF20071A085 /* Personal_CapitalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Personal_CapitalTests.m; sourceTree = "<group>"; };
 		30065D6520982FF20071A085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30065D6E209833240071A085 /* RSSEntry.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSEntry.h; sourceTree = "<group>"; };
+		30065D6F209833240071A085 /* RSSEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSEntry.m; sourceTree = "<group>"; };
+		30065D78209928D00071A085 /* RSSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
+		30065D79209928D00071A085 /* RSSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,15 +87,15 @@
 		30065D4920982FF20071A085 /* Personal Capital */ = {
 			isa = PBXGroup;
 			children = (
+				30065D7120990FE00071A085 /* Models */,
+				30065D74209910480071A085 /* Helpers */,
 				30065D4A20982FF20071A085 /* AppDelegate.h */,
 				30065D4B20982FF20071A085 /* AppDelegate.m */,
 				30065D4D20982FF20071A085 /* ViewController.h */,
 				30065D4E20982FF20071A085 /* ViewController.m */,
-				30065D5020982FF20071A085 /* Main.storyboard */,
-				30065D5320982FF20071A085 /* Assets.xcassets */,
-				30065D5520982FF20071A085 /* LaunchScreen.storyboard */,
 				30065D5820982FF20071A085 /* Info.plist */,
-				30065D5920982FF20071A085 /* main.m */,
+				30065D7220990FF40071A085 /* Storyboards */,
+				30065D73209910090071A085 /* SupportFiles */,
 			);
 			path = "Personal Capital";
 			sourceTree = "<group>";
@@ -101,6 +107,42 @@
 				30065D6520982FF20071A085 /* Info.plist */,
 			);
 			path = "Personal CapitalTests";
+			sourceTree = "<group>";
+		};
+		30065D7120990FE00071A085 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30065D6E209833240071A085 /* RSSEntry.h */,
+				30065D6F209833240071A085 /* RSSEntry.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30065D7220990FF40071A085 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				30065D5520982FF20071A085 /* LaunchScreen.storyboard */,
+				30065D5020982FF20071A085 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		30065D73209910090071A085 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				30065D5920982FF20071A085 /* main.m */,
+				30065D5320982FF20071A085 /* Assets.xcassets */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		30065D74209910480071A085 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				30065D78209928D00071A085 /* RSSParser.h */,
+				30065D79209928D00071A085 /* RSSParser.m */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,7 +249,9 @@
 			files = (
 				30065D4F20982FF20071A085 /* ViewController.m in Sources */,
 				30065D5A20982FF20071A085 /* main.m in Sources */,
+				30065D7A209928D00071A085 /* RSSParser.m in Sources */,
 				30065D4C20982FF20071A085 /* AppDelegate.m in Sources */,
+				30065D70209833240071A085 /* RSSEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
