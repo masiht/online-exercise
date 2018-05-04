@@ -11,6 +11,7 @@
 #import "RSSEntry.h"
 #import "Cell.h"
 #import "HeaderView.h"
+#import "ArticleViewController.h"
 
 @interface ViewController () {
     
@@ -48,6 +49,8 @@
     
     // header view
     headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, _collectionView.frame.size.width, headerHeight - 50)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnHeader:)];
+    [headerView addGestureRecognizer:tap];
     
     // parser
     // register for notification to subscribe to the parser finish notification
@@ -88,6 +91,22 @@
     [rssParser startParsing];
 }
 
+- (void)handleTapOnHeader:(UITapGestureRecognizer *)recognizer {
+    [self viewArticleInWebview:((RSSEntry *)[feeds objectAtIndex:0])];
+}
+
+
+/**
+ a helper method that navigates to webview and sends url to the webview
+ @param entry webview shows given rss entry
+ */
+- (void)viewArticleInWebview:(RSSEntry *)entry {
+    ArticleViewController *articleViewController = [[ArticleViewController alloc] initWithNibName:nil bundle:nil];
+    articleViewController.title = entry.title;
+    articleViewController.url = entry.link;
+    [self.navigationController pushViewController:articleViewController animated:YES];
+}
+
 #pragma mark -
 #pragma mark collection view
 
@@ -116,8 +135,13 @@
     
     // title
     cell.title.text = currentArticle.title;
-    
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+    RSSEntry *entry = ((RSSEntry *)[feeds objectAtIndex:indexPath.row+1]);
+    [self viewArticleInWebview:entry];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

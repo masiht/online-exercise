@@ -18,6 +18,7 @@
 		30065D7A209928D00071A085 /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D79209928D00071A085 /* RSSParser.m */; };
 		3071909A209BA0C700C8ADE7 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30719099209BA0C700C8ADE7 /* Cell.m */; };
 		307190A1209C25CF00C8ADE7 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 307190A0209C25CF00C8ADE7 /* HeaderView.m */; };
+		307190A4209C435300C8ADE7 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 307190A3209C435300C8ADE7 /* ArticleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		30719099209BA0C700C8ADE7 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		3071909F209C25CF00C8ADE7 /* HeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
 		307190A0209C25CF00C8ADE7 /* HeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		307190A2209C435300C8ADE7 /* ArticleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
+		307190A3209C435300C8ADE7 /* ArticleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,13 +96,15 @@
 		30065D4920982FF20071A085 /* Personal Capital */ = {
 			isa = PBXGroup;
 			children = (
+				30065D4A20982FF20071A085 /* AppDelegate.h */,
+				30065D4B20982FF20071A085 /* AppDelegate.m */,
 				3071909E209BB20900C8ADE7 /* Views */,
 				30065D7120990FE00071A085 /* Models */,
 				30065D74209910480071A085 /* Helpers */,
-				30065D4A20982FF20071A085 /* AppDelegate.h */,
-				30065D4B20982FF20071A085 /* AppDelegate.m */,
 				30065D4D20982FF20071A085 /* ViewController.h */,
 				30065D4E20982FF20071A085 /* ViewController.m */,
+				307190A2209C435300C8ADE7 /* ArticleViewController.h */,
+				307190A3209C435300C8ADE7 /* ArticleViewController.m */,
 				30065D5820982FF20071A085 /* Info.plist */,
 				30065D7220990FF40071A085 /* Storyboards */,
 				30065D73209910090071A085 /* SupportFiles */,
@@ -270,6 +275,7 @@
 				30065D5A20982FF20071A085 /* main.m in Sources */,
 				30065D7A209928D00071A085 /* RSSParser.m in Sources */,
 				30065D4C20982FF20071A085 /* AppDelegate.m in Sources */,
+				307190A4209C435300C8ADE7 /* ArticleViewController.m in Sources */,
 				30065D70209833240071A085 /* RSSEntry.m in Sources */,
 				3071909A209BA0C700C8ADE7 /* Cell.m in Sources */,
 			);
