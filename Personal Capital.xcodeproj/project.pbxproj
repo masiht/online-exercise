@@ -17,6 +17,7 @@
 		30065D70209833240071A085 /* RSSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D6F209833240071A085 /* RSSEntry.m */; };
 		30065D7A209928D00071A085 /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D79209928D00071A085 /* RSSParser.m */; };
 		3071909A209BA0C700C8ADE7 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30719099209BA0C700C8ADE7 /* Cell.m */; };
+		307190A1209C25CF00C8ADE7 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 307190A0209C25CF00C8ADE7 /* HeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		30065D79209928D00071A085 /* RSSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
 		30719098209BA0C700C8ADE7 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		30719099209BA0C700C8ADE7 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		3071909F209C25CF00C8ADE7 /* HeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		307190A0209C25CF00C8ADE7 /* HeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +157,8 @@
 			children = (
 				30719098209BA0C700C8ADE7 /* Cell.h */,
 				30719099209BA0C700C8ADE7 /* Cell.m */,
+				3071909F209C25CF00C8ADE7 /* HeaderView.h */,
+				307190A0209C25CF00C8ADE7 /* HeaderView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				307190A1209C25CF00C8ADE7 /* HeaderView.m in Sources */,
 				30065D4F20982FF20071A085 /* ViewController.m in Sources */,
 				30065D5A20982FF20071A085 /* main.m in Sources */,
 				30065D7A209928D00071A085 /* RSSParser.m in Sources */,
