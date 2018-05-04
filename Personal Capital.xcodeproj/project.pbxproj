@@ -16,6 +16,7 @@
 		30065D6420982FF20071A085 /* Personal_CapitalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D6320982FF20071A085 /* Personal_CapitalTests.m */; };
 		30065D70209833240071A085 /* RSSEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D6F209833240071A085 /* RSSEntry.m */; };
 		30065D7A209928D00071A085 /* RSSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 30065D79209928D00071A085 /* RSSParser.m */; };
+		3071909A209BA0C700C8ADE7 /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 30719099209BA0C700C8ADE7 /* Cell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		30065D6F209833240071A085 /* RSSEntry.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSEntry.m; sourceTree = "<group>"; };
 		30065D78209928D00071A085 /* RSSParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RSSParser.h; sourceTree = "<group>"; };
 		30065D79209928D00071A085 /* RSSParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RSSParser.m; sourceTree = "<group>"; };
+		30719098209BA0C700C8ADE7 /* Cell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		30719099209BA0C700C8ADE7 /* Cell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,7 @@
 		30065D4920982FF20071A085 /* Personal Capital */ = {
 			isa = PBXGroup;
 			children = (
+				3071909E209BB20900C8ADE7 /* Views */,
 				30065D7120990FE00071A085 /* Models */,
 				30065D74209910480071A085 /* Helpers */,
 				30065D4A20982FF20071A085 /* AppDelegate.h */,
@@ -143,6 +147,15 @@
 				30065D79209928D00071A085 /* RSSParser.m */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		3071909E209BB20900C8ADE7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				30719098209BA0C700C8ADE7 /* Cell.h */,
+				30719099209BA0C700C8ADE7 /* Cell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +265,7 @@
 				30065D7A209928D00071A085 /* RSSParser.m in Sources */,
 				30065D4C20982FF20071A085 /* AppDelegate.m in Sources */,
 				30065D70209833240071A085 /* RSSEntry.m in Sources */,
+				3071909A209BA0C700C8ADE7 /* Cell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
