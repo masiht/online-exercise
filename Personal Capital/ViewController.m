@@ -16,6 +16,7 @@
 @interface ViewController () {
     
     NSArray *feeds;
+    NSMutableArray *imagesData;
     UIActivityIndicatorView *spinner;
     RSSParser *rssParser;
     BOOL iPad;
@@ -30,8 +31,10 @@
 
     // nav bar
     self.title = @"Research & Insights";
-    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithTitle:@"⟲" style:UIBarButtonItemStyleDone target:self action:@selector(refreshFeed)];
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshFeed)];
+
     self.navigationItem.rightBarButtonItem = rightBtn;
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     iPad = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
     
@@ -51,6 +54,7 @@
     headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, _collectionView.frame.size.width, headerHeight - 50)];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnHeader:)];
     [headerView addGestureRecognizer:tap];
+    [_collectionView addSubview:headerView];
     
     // parser
     // register for notification to subscribe to the parser finish notification
@@ -65,6 +69,27 @@
     [self.view addSubview:spinner];
     spinner.center = self.view.center;
     [spinner startAnimating];
+    
+    
+    // Masonry is a great tool for setting constraints programmatically
+    // It is very easy to use and reduce lots of complexities
+    //////////////////////////////////////////////////////////////
+    // Auto Layout Constrains
+    _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    
+    headerView.translatesAutoresizingMaskIntoConstraints = NO;
+    [_collectionView addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_collectionView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
+
+
+    spinner.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    
+    [self.view setNeedsLayout];
 }
 
 /**
@@ -74,12 +99,17 @@
 -(void)loadFeeds:(NSNotification *)notification {
     
     feeds = [notification object];
+    imagesData = [[NSMutableArray alloc] init];
+    for (RSSEntry *feed in feeds) {
+        [imagesData addObject: [NSData dataWithContentsOfURL:[NSURL URLWithString:feed.image]]];
+    }
     // back to main thread to update UI
     dispatch_async(dispatch_get_main_queue(), ^{
         [spinner stopAnimating];
-        [_collectionView addSubview:headerView];
         [headerView setRSSFeed:((RSSEntry *)[feeds objectAtIndex:0])];
         [_collectionView reloadData];
+        _collectionView.userInteractionEnabled = YES;
+        self.navigationItem.rightBarButtonItem.enabled = YES;
     });
 }
 
@@ -88,13 +118,14 @@
  */
 -(void)refreshFeed {
     [spinner startAnimating];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
+    _collectionView.userInteractionEnabled = NO;
     [rssParser startParsing];
 }
 
 - (void)handleTapOnHeader:(UITapGestureRecognizer *)recognizer {
     [self viewArticleInWebview:((RSSEntry *)[feeds objectAtIndex:0])];
 }
-
 
 /**
  a helper method that navigates to webview and sends url to the webview
@@ -130,8 +161,7 @@
     // (since table reuses the cells on scroll)
     // It will cache the images and make the app faster and more responsive
     // here is a primitive implementation without SDWebImage
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:currentArticle.image]];
-    cell.imageView.image = [UIImage imageWithData:imageData];
+    cell.imageView.image = [UIImage imageWithData:[imagesData objectAtIndex:indexPath.row+1]];
     
     // title
     cell.title.text = currentArticle.title;
@@ -139,15 +169,19 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
     RSSEntry *entry = ((RSSEntry *)[feeds objectAtIndex:indexPath.row+1]);
     [self viewArticleInWebview:entry];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    // FIXME:
-    CGFloat size = [[UIScreen mainScreen] bounds].size.width - 50.0;
-    return iPad ? CGSizeMake(size / 3, size / 3 - 35) : CGSizeMake(size / 2, size / 2 - 35);
+    
+    CGFloat widthSize = [[UIScreen mainScreen] bounds].size.width - 50.0;
+    UIInterfaceOrientation orientationOnLunch = [[UIApplication sharedApplication] statusBarOrientation];
+    if (UIInterfaceOrientationIsPortrait(orientationOnLunch)) {
+        return iPad ? CGSizeMake(widthSize / 3, widthSize / 3 - 35) : CGSizeMake(widthSize / 2, widthSize / 2 - 35);
+    } else {
+        return iPad ? CGSizeMake(widthSize / 4, widthSize / 4 - 35) : CGSizeMake(widthSize / 3, widthSize / 3 - 35);
+    }
 }
 
 @end

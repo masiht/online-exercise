@@ -14,6 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
         // image view
         // TODO: width and height have to come from the rss
         CGFloat imageHeight = (self.bounds.size.width * 300)/780;
@@ -31,6 +32,18 @@
         // draw border
         self.layer.borderWidth = 1;
         self.layer.borderColor = [UIColor grayColor].CGColor;
+        
+        // Constraints
+        self.imageView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:imageHeight]];
+        // imageview and contentView should always have the same width
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0.0]];
+        
+        self.title.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_title attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeLeft multiplier:1.0 constant:5.0]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_title attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeRight multiplier:1.0 constant:-5.0]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_title]-10-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_title)]];
     }
     return self;
 }
