@@ -6,14 +6,14 @@
 //  Copyright © 2018 PC. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "RootViewController.h"
 #import "RSSParser.h"
 #import "RSSEntry.h"
 #import "Cell.h"
 #import "HeaderView.h"
 #import "ArticleViewController.h"
 
-@interface ViewController () {
+@interface RootViewController () {
     
     NSArray *feeds;
     NSMutableArray *imagesData;
@@ -24,7 +24,7 @@
 }
 @end
 
-@implementation ViewController
+@implementation RootViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,7 +32,6 @@
     // nav bar
     self.title = @"Research & Insights";
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshFeed)];
-
     self.navigationItem.rightBarButtonItem = rightBtn;
     self.navigationItem.rightBarButtonItem.enabled = NO;
     
@@ -50,12 +49,6 @@
     [_collectionView setBackgroundColor:[UIColor whiteColor]];
     [self.view addSubview:_collectionView];
     
-    // header view
-    headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, _collectionView.frame.size.width, headerHeight - 50)];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnHeader:)];
-    [headerView addGestureRecognizer:tap];
-    [_collectionView addSubview:headerView];
-    
     // parser
     // register for notification to subscribe to the parser finish notification
     //  note: this also can be implemented with delegate design pattern
@@ -70,6 +63,11 @@
     spinner.center = self.view.center;
     [spinner startAnimating];
     
+    // header view
+    headerView = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, _collectionView.frame.size.width, headerHeight - 50)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnHeader:)];
+    [headerView addGestureRecognizer:tap];
+    [_collectionView addSubview:headerView];
     
     // Masonry is a great tool for setting constraints programmatically
     // It is very easy to use and reduce lots of complexities
@@ -81,10 +79,6 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.0 constant:0.0]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_collectionView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
     
-    headerView.translatesAutoresizingMaskIntoConstraints = NO;
-    [_collectionView addConstraint:[NSLayoutConstraint constraintWithItem:headerView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_collectionView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
-
-
     spinner.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:spinner attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
@@ -175,7 +169,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    CGFloat widthSize = [[UIScreen mainScreen] bounds].size.width - 50.0;
+    CGFloat widthSize = [[UIScreen mainScreen] bounds].size.width - 100.0;
     UIInterfaceOrientation orientationOnLunch = [[UIApplication sharedApplication] statusBarOrientation];
     if (UIInterfaceOrientationIsPortrait(orientationOnLunch)) {
         return iPad ? CGSizeMake(widthSize / 3, widthSize / 3 - 35) : CGSizeMake(widthSize / 2, widthSize / 2 - 35);
